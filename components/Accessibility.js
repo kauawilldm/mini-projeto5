@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
-const AccessibilityDataComponent = () => {
-  const [data, setData] = useState([]);
+const Accessibility = () => {
+  const [accessibilityData, setAccessibilityData] = useState([]);
 
   useEffect(() => {
     fetch('/api/accessibility/data')
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(error => console.error('Error fetching accessibility data:', error));
+      .then((res) => res.json())
+      .then((data) => setAccessibilityData(data))
+      .catch((err) => console.error('Erro ao buscar dados de acessibilidade:', err));
   }, []);
 
   return (
     <div>
-      <h2>Accessibility Data</h2>
+      <h2>Acessibilidade por Região</h2>
       <ul>
-        {data.map((item, index) => (
+        {accessibilityData.map((item, index) => (
           <li key={index}>
-            <strong>Região:</strong> {item.região} - <strong>Acessibilidade:</strong> {item.acessibilidade}
+            <strong>{item.região}</strong>: {item.acessibilidade}
           </li>
         ))}
       </ul>
@@ -24,4 +24,4 @@ const AccessibilityDataComponent = () => {
   );
 };
 
-export default AccessibilityDataComponent;
+export default Accessibility;

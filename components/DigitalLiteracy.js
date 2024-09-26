@@ -1,29 +1,28 @@
-import React, { useEffect, useState } from 'react';
 
-const Courses = () => {
-  const [courses, setCourses] = useState([]);
+
+
+import React, { useState, useEffect } from 'react';
+
+function DigitalLiteracy() {
+  const [tips, setTips] = useState([]);
 
   useEffect(() => {
-    fetch('/api/courses/free')
+    fetch('/api/digital-literacy/tips')
       .then(response => response.json())
-      .then(data => setCourses(data))
-      .catch(error => console.error('Erro ao buscar cursos:', error));
+      .then(data => setTips(data))
+      .catch(error => console.error('Erro ao buscar dicas:', error));
   }, []);
 
   return (
     <div>
-      <h2>Cursos Gratuitos</h2>
+      <h2>Dicas de Letramento Digital</h2>
       <ul>
-        {courses.map(course => (
-          <li key={course.titulo}>
-            <a href={course.link} target="_blank" rel="noopener noreferrer">
-              {course.titulo}
-            </a> - {course.plataforma}
-          </li>
+        {tips.map((tip, index) => (
+          <li key={index}>{tip}</li>
         ))}
       </ul>
     </div>
   );
-};
+}
 
-export default Courses;
+export default DigitalLiteracy;
